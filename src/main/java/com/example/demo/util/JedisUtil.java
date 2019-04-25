@@ -19,7 +19,7 @@ public class JedisUtil {
      */
     public boolean isLogin(String username){
         boolean isLogin = jedis.setnx(username, "success")>0;
-        //设置登录后的key的超时时常，每次请求后端都会重新计时
+        //设置登录后的key的超时时常，每次请求后端都会重新计时，单位秒
         expire(username,5);
         return !isLogin;
     }

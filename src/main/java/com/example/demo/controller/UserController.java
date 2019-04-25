@@ -25,7 +25,7 @@ public class UserController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         int roleId = Integer.parseInt(request.getParameter("roleId"));
-        boolean isSuccess = false;
+        boolean isSuccess;
         try {
             isSuccess = userService.logInIsSuccess(username, password, roleId);
         } catch (DemoBusinessException e) {
