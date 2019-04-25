@@ -29,15 +29,15 @@ public class UserController {
         try {
             isSuccess = userService.logInIsSuccess(username, password, roleId);
         } catch (DemoBusinessException e) {
-            return new BusinessResult<>(BusinessResult.ResultCode.userNotFound,"当前用户不存在!");
+            return new BusinessResult<>(BusinessResult.ResultCode.userNotFound,"current user not found!", "");
         }
         if(isSuccess){
-            if(jedisUtil.isLogin(username)){
-                return new BusinessResult<>(BusinessResult.ResultCode.isLogon,"current user is Logon status!");
+            if(jedisUtil.isLogin(username, roleId)){
+                return new BusinessResult<>(BusinessResult.ResultCode.isLogon,"current user is Logon status!", "");
             }
-            return new BusinessResult<>(BusinessResult.ResultCode.success,"login success!");
+            return new BusinessResult<>(BusinessResult.ResultCode.success,"login success!", "");
         }else{
-            return new BusinessResult<>(BusinessResult.ResultCode.logError,"password error!");
+            return new BusinessResult<>(BusinessResult.ResultCode.logError,"password error!", "");
         }
     }
 
@@ -45,7 +45,7 @@ public class UserController {
     public BusinessResult<String> logout(HttpServletRequest request, HttpServletResponse response){
         String username = request.getParameter("username");
         jedisUtil.expire(username,0);
-        return new BusinessResult<>(BusinessResult.ResultCode.success,"logout success!");
+        return new BusinessResult<>(BusinessResult.ResultCode.success,"logout success!", "");
     }
 
 }

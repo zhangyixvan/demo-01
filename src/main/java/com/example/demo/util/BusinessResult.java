@@ -13,20 +13,23 @@ public class BusinessResult<E> {
      * 3:无权限
      */
     private ResultCode code;
+    private String msg;
     private E data;
 
-    public BusinessResult(ResultCode code,E e){
+    public BusinessResult(ResultCode code, String msg, E e) {
         this.code = code;
+        this.msg = msg;
         this.data = e;
     }
 
-    public enum ResultCode{
+    public enum ResultCode {
         success,
         notLogin,
         isLogon,
         noPermission,
         userNotFound,
-        logError
+        logError,
+        notPermission
     }
 
 }
