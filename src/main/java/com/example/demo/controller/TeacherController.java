@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.service.TeacherService;
 import com.example.demo.util.BusinessResult;
 import org.assertj.core.util.Lists;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,12 +13,11 @@ import java.util.List;
 @RequestMapping("teacher")
 public class TeacherController extends BaseController {
 
-    @Autowired
-    TeacherService teacherService;
+
 
 
     /**
-     * 为学生绑定课程
+     * 老师为学生绑定课程
      * @param request
      * @param response
      * @return

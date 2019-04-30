@@ -1,10 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.exception.DemoBusinessException;
-import com.example.demo.service.UserService;
 import com.example.demo.util.BusinessResult;
-import com.example.demo.util.JedisUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,8 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("user")
 public class UserController extends BaseController {
 
-    @Autowired
-    UserService userService;
+    /**
+     * 登入
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping("/login")
     public BusinessResult<String> login(HttpServletRequest request, HttpServletResponse response){
         String username = request.getParameter("username");
@@ -38,6 +39,12 @@ public class UserController extends BaseController {
         }
     }
 
+    /**
+     * 登出
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping("/logout")
     public BusinessResult<String> logout(HttpServletRequest request, HttpServletResponse response){
         String username = request.getParameter("username");

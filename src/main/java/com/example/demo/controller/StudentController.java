@@ -1,11 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.bean.User;
-import com.example.demo.service.StudentService;
 import com.example.demo.util.BusinessResult;
-import com.example.demo.util.JedisUtil;
 import org.assertj.core.util.Lists;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,8 +13,7 @@ import java.util.List;
 @RequestMapping("student")
 public class StudentController extends BaseController {
 
-    @Autowired
-    StudentService studentService;
+
 
 
     /**
@@ -40,6 +35,33 @@ public class StudentController extends BaseController {
                     "current user not have permissions!", Lists.newArrayList());
         }
         return new BusinessResult<>(BusinessResult.ResultCode.success, "", studentService.getStudentList());
+    }
+
+
+    /**
+     * 学生选课，无老师权限验证
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("/choseCourse")
+    public BusinessResult choseCourse(HttpServletRequest request, HttpServletResponse response){
+        String username = request.getParameter("username");
+        Integer roleId = Integer.parseInt(request.getParameter("roleId"));
+        if (!jedisUtil.isLogin(username,roleId)) {
+            return new BusinessResult<>(BusinessResult.ResultCode.notLogin,
+                    "current user not login or login timeout, please retry login!", Lists.newArrayList());
+        }
+        List<String> courseLists;
+        try{
+            courseLists = Lists.newArrayList(request.getParameter("courseList").split(","));
+        } catch (Throwable e) {
+            return new BusinessResult<>(BusinessResult.ResultCode.system_error,
+                    "please check is chose course！", false);
+        }
+        String studentUserId = request.getParameter("studentUserIds");
+
+        return new BusinessResult<>(BusinessResult.ResultCode.success,"", teacherService.choseCourse(courseLists, studentUserId));
     }
 
 }
