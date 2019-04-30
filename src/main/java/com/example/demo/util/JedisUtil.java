@@ -1,6 +1,8 @@
 package com.example.demo.util;
 
 
+import org.aspectj.lang.annotation.After;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
@@ -9,7 +11,13 @@ import redis.clients.jedis.Jedis;
 @Component
 public class JedisUtil {
 
-    Jedis jedis=new Jedis("127.0.0.1",6379);
+    @Value("${spring.redis.host}")
+    private String host;
+
+    @Value("${spring.redis.port}")
+    private int port;
+
+    private Jedis jedis=new Jedis(host,port);
 
     /**
      * 判断是否登录时使用

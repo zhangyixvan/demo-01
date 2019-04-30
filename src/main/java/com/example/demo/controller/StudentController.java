@@ -15,12 +15,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("student")
-public class StudentController {
+public class StudentController extends BaseController {
 
     @Autowired
     StudentService studentService;
-    @Autowired
-    JedisUtil jedisUtil;
+
 
     /**
      * 获取学生列表
@@ -29,14 +28,14 @@ public class StudentController {
      * @return
      */
     @RequestMapping("/studentList")
-    public BusinessResult<List<User>> logout(HttpServletRequest request, HttpServletResponse response) {
+    public BusinessResult logout(HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
         Integer roleId = Integer.parseInt(request.getParameter("roleId"));
-        if (!jedisUtil.isLogin(username,roleId)) {
+        if (!isLogin(username,roleId)) {
             return new BusinessResult<>(BusinessResult.ResultCode.notLogin,
                     "current user not login or login timeout, please retry login!", Lists.newArrayList());
         }
-        if (roleId != User.roleCode.teacher.getCode()&&roleId != User.roleCode.admin.getCode()) {
+        if (isTeacherAndAdmin(roleId)) {
             return new BusinessResult<>(BusinessResult.ResultCode.notPermission,
                     "current user not have permissions!", Lists.newArrayList());
         }

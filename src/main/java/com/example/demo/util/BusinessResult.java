@@ -26,7 +26,6 @@ public class BusinessResult<E> {
         success,
         notLogin,
         isLogon,
-        noPermission,
         userNotFound,
         logError,
         notPermission

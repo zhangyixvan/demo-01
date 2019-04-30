@@ -13,13 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("user")
-public class UserController {
+public class UserController extends BaseController {
 
     @Autowired
     UserService userService;
-    @Autowired
-    JedisUtil jedisUtil;
-
     @RequestMapping("/login")
     public BusinessResult<String> login(HttpServletRequest request, HttpServletResponse response){
         String username = request.getParameter("username");
@@ -32,7 +29,7 @@ public class UserController {
             return new BusinessResult<>(BusinessResult.ResultCode.userNotFound,"current user not found!", "");
         }
         if(isSuccess){
-            if(jedisUtil.isLogin(username, roleId)){
+            if(isLogin(username, roleId)){
                 return new BusinessResult<>(BusinessResult.ResultCode.isLogon,"current user is Logon status!", "");
             }
             return new BusinessResult<>(BusinessResult.ResultCode.success,"login success!", "");

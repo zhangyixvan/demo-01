@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("teacher")
-public class TeacherController {
+public class TeacherController extends BaseController {
 
     
 
