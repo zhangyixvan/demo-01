@@ -3,10 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.util.BusinessResult;
 import org.assertj.core.util.Lists;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -20,7 +20,7 @@ public class TeacherController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping("/choseCourse")
+    @RequestMapping(value = "/choseCourse", method = {RequestMethod.POST})
     public BusinessResult choseCourse(HttpServletRequest request) {
         String username = request.getParameter("username");
         Integer roleId = Integer.parseInt(request.getParameter("roleId"));

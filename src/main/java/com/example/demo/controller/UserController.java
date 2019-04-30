@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.exception.DemoBusinessException;
 import com.example.demo.util.BusinessResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ public class UserController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login",method = {RequestMethod.POST})
     public BusinessResult<String> login(HttpServletRequest request) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
