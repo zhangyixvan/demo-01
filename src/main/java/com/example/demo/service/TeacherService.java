@@ -6,4 +6,5 @@ public interface TeacherService {
 
     boolean choseCourse(List<String> courseList, String studentUserId);
 
+    boolean setGrade(String id, int grade);
 }

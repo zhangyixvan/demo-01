@@ -44,4 +44,21 @@ public class TeacherController extends BaseController {
         return new BusinessResult<>(BusinessResult.ResultCode.success, "", teacherService.choseCourse(courseLists, studentUserId));
     }
 
+    @RequestMapping(value = "setGrade", method = {RequestMethod.POST})
+    public BusinessResult setGrade(HttpServletRequest request) {
+        String username = request.getParameter("username");
+        Integer roleId = Integer.parseInt(request.getParameter("roleId"));
+        if (!jedisUtil.isLogin(username, roleId)) {
+            return new BusinessResult<>(BusinessResult.ResultCode.notLogin,
+                    "current user not login or login timeout, please retry login!", Lists.newArrayList());
+        }
+        if (isTeacherAndAdmin(roleId)) {
+            return new BusinessResult<>(BusinessResult.ResultCode.notPermission,
+                    "current user not have permissions!", Lists.newArrayList());
+        }
+        int grade = Integer.parseInt(request.getParameter("grade"));
+        String id = request.getParameter("id");
+        return new BusinessResult<>(BusinessResult.ResultCode.success, "", teacherService.setGrade(id, grade));
+    }
+
 }

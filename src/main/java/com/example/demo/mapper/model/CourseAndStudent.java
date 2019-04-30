@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class CourseAndStudent {
 
+    private String id;
+
     private int courseId;
     /**
      * 学生id

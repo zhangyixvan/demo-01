@@ -4,10 +4,15 @@
 <mapper namespace="com.example.demo.mapper.TeacherMapper">
     <insert id="choseCourse" parameterType="com.example.demo.mapper.model.CourseAndStudent">
         insert into
-        course_student (course_id,user_id,class_is_over,grade)
+        course_student (id,course_id,user_id,class_is_over,grade)
         VALUES
         <foreach collection="list" index="index" item="item" separator=",">
-            (#{item.courseId},#{item.userId},#{item.classIsOver},#{item.grade})
+            (#{item.id},#{item.courseId},#{item.userId},#{item.classIsOver},#{item.grade})
         </foreach>
     </insert>
+    <update id="setGrade">
+        update course_student
+		set grade = #{grade}
+		where id=#{id}
+    </update>
 </mapper>
