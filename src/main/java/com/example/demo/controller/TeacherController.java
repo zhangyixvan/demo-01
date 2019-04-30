@@ -14,28 +14,26 @@ import java.util.List;
 public class TeacherController extends BaseController {
 
 
-
-
     /**
      * 老师为学生绑定课程
+     *
      * @param request
-     * @param response
      * @return
      */
     @RequestMapping("/choseCourse")
-    public BusinessResult choseCourse(HttpServletRequest request, HttpServletResponse response){
+    public BusinessResult choseCourse(HttpServletRequest request) {
         String username = request.getParameter("username");
         Integer roleId = Integer.parseInt(request.getParameter("roleId"));
-        if (!jedisUtil.isLogin(username,roleId)) {
+        if (!jedisUtil.isLogin(username, roleId)) {
             return new BusinessResult<>(BusinessResult.ResultCode.notLogin,
                     "current user not login or login timeout, please retry login!", Lists.newArrayList());
         }
-        if(isTeacherAndAdmin(roleId)){
+        if (isTeacherAndAdmin(roleId)) {
             return new BusinessResult<>(BusinessResult.ResultCode.notPermission,
                     "current user not have permissions!", Lists.newArrayList());
         }
         List<String> courseLists;
-        try{
+        try {
             courseLists = Lists.newArrayList(request.getParameter("courseList").split(","));
         } catch (Throwable e) {
             return new BusinessResult<>(BusinessResult.ResultCode.system_error,
@@ -43,7 +41,7 @@ public class TeacherController extends BaseController {
         }
         String studentUserId = request.getParameter("studentUserId");
 
-        return new BusinessResult<>(BusinessResult.ResultCode.success,"",teacherService.choseCourse(courseLists, studentUserId));
+        return new BusinessResult<>(BusinessResult.ResultCode.success, "", teacherService.choseCourse(courseLists, studentUserId));
     }
 
 }

@@ -18,7 +18,7 @@ public class User {
             this.code = code;
         }
 
-        public int getCode(){
+        public int getCode() {
             return this.code;
         }
 

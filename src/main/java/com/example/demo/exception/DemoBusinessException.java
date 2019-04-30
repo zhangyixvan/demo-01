@@ -1,8 +1,8 @@
 package com.example.demo.exception;
 
-public class DemoBusinessException extends RuntimeException{
+public class DemoBusinessException extends RuntimeException {
 
-    public DemoBusinessException(String msg){
+    public DemoBusinessException(String msg) {
         super(msg);
     }
 

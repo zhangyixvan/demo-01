@@ -17,11 +17,10 @@ public class CourseController extends BaseController {
      * 获取课程列表
      *
      * @param request
-     * @param response
      * @return
      */
     @RequestMapping("/courseList")
-    public BusinessResult logout(HttpServletRequest request, HttpServletResponse response) {
+    public BusinessResult logout(HttpServletRequest request) {
         String username = request.getParameter("username");
         Integer roleId = Integer.parseInt(request.getParameter("roleId"));
         if (!jedisUtil.isLogin(username, roleId)) {

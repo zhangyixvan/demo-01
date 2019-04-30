@@ -23,9 +23,9 @@ public class TeacherServiceImpl implements TeacherService {
             return courseAndStudent;
         }).collect(Collectors.toList());
         int i = teacherMapper.choseCourse(courseAndStudents);
-        if(i == courseList.size()){
+        if (i == courseList.size()) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }

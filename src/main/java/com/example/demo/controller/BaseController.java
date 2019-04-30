@@ -20,12 +20,12 @@ public class BaseController {
     @Autowired
     UserService userService;
 
-    protected boolean isLogin(String username,int roleId){
-        return !jedisUtil.isLogin(username,roleId);
+    protected boolean isLogin(String username, int roleId) {
+        return !jedisUtil.isLogin(username, roleId);
     }
 
-    protected boolean isTeacherAndAdmin(int roleId){
-        return roleId != User.roleCode.teacher.getCode()&&roleId != User.roleCode.admin.getCode();
+    protected boolean isTeacherAndAdmin(int roleId) {
+        return roleId != User.roleCode.teacher.getCode() && roleId != User.roleCode.admin.getCode();
     }
 
 }

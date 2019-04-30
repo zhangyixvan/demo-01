@@ -14,10 +14,9 @@ import java.util.List;
 public class StudentController extends BaseController {
 
 
-
-
     /**
      * 获取学生列表
+     *
      * @param request
      * @param response
      * @return
@@ -26,7 +25,7 @@ public class StudentController extends BaseController {
     public BusinessResult logout(HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
         Integer roleId = Integer.parseInt(request.getParameter("roleId"));
-        if (!isLogin(username,roleId)) {
+        if (!isLogin(username, roleId)) {
             return new BusinessResult<>(BusinessResult.ResultCode.notLogin,
                     "current user not login or login timeout, please retry login!", Lists.newArrayList());
         }
@@ -40,20 +39,20 @@ public class StudentController extends BaseController {
 
     /**
      * 学生选课，无老师权限验证
+     *
      * @param request
-     * @param response
      * @return
      */
     @RequestMapping("/choseCourse")
-    public BusinessResult choseCourse(HttpServletRequest request, HttpServletResponse response){
+    public BusinessResult choseCourse(HttpServletRequest request) {
         String username = request.getParameter("username");
         Integer roleId = Integer.parseInt(request.getParameter("roleId"));
-        if (!jedisUtil.isLogin(username,roleId)) {
+        if (!jedisUtil.isLogin(username, roleId)) {
             return new BusinessResult<>(BusinessResult.ResultCode.notLogin,
                     "current user not login or login timeout, please retry login!", Lists.newArrayList());
         }
         List<String> courseLists;
-        try{
+        try {
             courseLists = Lists.newArrayList(request.getParameter("courseList").split(","));
         } catch (Throwable e) {
             return new BusinessResult<>(BusinessResult.ResultCode.system_error,
@@ -61,7 +60,7 @@ public class StudentController extends BaseController {
         }
         String studentUserId = request.getParameter("studentUserIds");
 
-        return new BusinessResult<>(BusinessResult.ResultCode.success,"", teacherService.choseCourse(courseLists, studentUserId));
+        return new BusinessResult<>(BusinessResult.ResultCode.success, "", teacherService.choseCourse(courseLists, studentUserId));
     }
 
 }

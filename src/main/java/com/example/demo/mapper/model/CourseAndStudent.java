@@ -3,7 +3,7 @@ package com.example.demo.mapper.model;
 import lombok.Data;
 
 @Data
-    public class CourseAndStudent {
+public class CourseAndStudent {
 
     private int courseId;
     /**

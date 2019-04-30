@@ -18,10 +18,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean logInIsSuccess(String username, String password, int roleId) throws DemoBusinessException {
         User user = userMapper.findUserByUserName(username);
-        if(Objects.isNull(user)){
+        if (Objects.isNull(user)) {
             throw new DemoBusinessException("用户不存在");
         }
-        if(user.getPassword().equals(password)&&user.getRoleId() == roleId){
+        if (user.getPassword().equals(password) && user.getRoleId() == roleId) {
             return true;
         }
         return false;
