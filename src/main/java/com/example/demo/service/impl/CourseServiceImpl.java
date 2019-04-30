@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.bean.Course;
+import com.example.demo.bean.CourseAndTeacher;
 import com.example.demo.mapper.CourseMapper;
 import com.example.demo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public class CourseServiceImpl implements CourseService {
     CourseMapper courseMapper;
 
     @Override
-    public List<Course> getCourseList() {
+    public List<CourseAndTeacher> getCourseList() {
         return courseMapper.getCourseList();
     }
 }

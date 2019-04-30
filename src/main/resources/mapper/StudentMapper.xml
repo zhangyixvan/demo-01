@@ -5,7 +5,8 @@
 	<select id="getStudentList" resultType="com.example.demo.bean.User">
 		select username 'username',
 		password 'password',
-		roleId 'roleId'
+		roleId 'roleId',
+		true_name 'name'
 		from sys_user
 		where roleId = 1;
 	</select>

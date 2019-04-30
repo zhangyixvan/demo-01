@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.TeacherMapper">
+	<insert id="choseCourse" parameterType="com.example.demo.mapper.model.CourseAndStudent">
+		insert into
+			course_student (course_id,user_id,class_is_over,grade)
+		VALUES
+		<foreach collection="list" index="index" item="item" separator=",">
+			(#{item.courseId},#{item.userId},#{item.classIsOver},#{item.grade})
+		</foreach>
+	</insert>
+</mapper>

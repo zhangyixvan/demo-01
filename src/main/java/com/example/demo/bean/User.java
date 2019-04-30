@@ -7,6 +7,7 @@ public class User {
     private String username;
     private String password;
     private int roleId;
+    private String name;
 
     public enum roleCode {
         student(1), teacher(2), admin(3);

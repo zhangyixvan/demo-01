@@ -28,7 +28,8 @@ public class BusinessResult<E> {
         isLogon,
         userNotFound,
         logError,
-        notPermission
+        notPermission,
+        system_error
     }
 
 }
